@@ -2,9 +2,11 @@ package com.gustavdev.qrcode.gen.infrastructure;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import com.amazonaws.regions.Region;
+
 import com.gustavdev.qrcode.gen.ports.StoragePort;
+
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
