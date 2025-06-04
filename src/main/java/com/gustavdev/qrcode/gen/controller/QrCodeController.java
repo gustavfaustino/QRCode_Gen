@@ -23,7 +23,7 @@ public class QrCodeController {
     @PostMapping
     public ResponseEntity<QrCodeGenerateResponse> generate(@RequestBody QrCodeGeneratorRequest request){
         try {
-            QrCodeGenerateResponse response = this.qrCodeGeneratorService.generateAndUploadQrCode(request.getText());
+            QrCodeGenerateResponse response = this.qrCodeGeneratorService.generateAndUploadQrCode(request.text());
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
