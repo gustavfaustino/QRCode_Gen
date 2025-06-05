@@ -1,68 +1,109 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 250 250 250;
+    --foreground: 54 54 54;
+
+    --card: 255 255 255;
+    --card-foreground: 54 54 54;
+
+    --popover: 255 255 255;
+    --popover-foreground: 54 54 54;
+
+    --primary: 139 92 246;
+    --primary-foreground: 255 255 255;
+
+    --secondary: 247 247 247;
+    --secondary-foreground: 54 54 54;
+
+    --muted: 237 237 237;
+    --muted-foreground: 123 123 123;
+
+    --accent: 166 136 250;
+    --accent-foreground: 255 255 255;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+
+    --border: 223 223 223;
+    --input: 223 223 223;
+    --ring: 139 92 246;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 255 255 255;
+    --sidebar-foreground: 54 54 54;
+    --sidebar-primary: 139 92 246;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 247 247 247;
+    --sidebar-accent-foreground: 54 54 54;
+    --sidebar-border: 223 223 223;
+    --sidebar-ring: 139 92 246;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 24 24 27;
+    --foreground: 250 250 250;
+
+    --card: 39 39 42;
+    --card-foreground: 250 250 250;
+
+    --popover: 39 39 42;
+    --popover-foreground: 250 250 250;
+
+    --primary: 139 92 246;
+    --primary-foreground: 255 255 255;
+
+    --secondary: 39 39 42;
+    --secondary-foreground: 250 250 250;
+
+    --muted: 39 39 42;
+    --muted-foreground: 161 161 170;
+
+    --accent: 166 136 250;
+    --accent-foreground: 255 255 255;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 139 92 246;
+
+    --sidebar-background: 24 24 27;
+    --sidebar-foreground: 250 250 250;
+    --sidebar-primary: 139 92 246;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 39 39 42;
+    --sidebar-accent-foreground: 250 250 250;
+    --sidebar-border: 39 39 42;
+    --sidebar-ring: 139 92 246;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(250 245 255) 50%, hsl(var(--background)) 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .gradient-background {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%, #f8fafc 100%);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
