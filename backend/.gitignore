@@ -34,3 +34,4 @@ build/
 
 notes.txt
 .env
+Dockerrun.aws.json
