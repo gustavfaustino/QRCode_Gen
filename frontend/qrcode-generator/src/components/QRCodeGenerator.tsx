@@ -5,6 +5,7 @@ import { QrCode } from "lucide-react";
 import InputField from "./InputField";
 import QRCodeDisplay from "./QRCodeDisplay";
 import DownloadButton from "./DownloadButton";
+import { toast } from "../hooks/use-toast";
 
 const QRCodeGenerator: React.FC = () => {
   const [inputText, setInputText] = useState("");
@@ -13,19 +14,51 @@ const QRCodeGenerator: React.FC = () => {
 
   const generateQRCode = async () => {
     if (!inputText.trim()) {
+      toast({
+        title: "Atenção!",
+        description: "Por favor, insira um texto ou URL válido.",
+        variant: "destructive",
+      });
       return;
     }
 
     setIsLoading(true);
+    setQrCodeDataUrl(null);
 
-    // Aqui será conectado o backend
-    
-    // Por enquanto, apenas simula o carregamento
-    setTimeout(() => {
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+      const response = await fetch(backendUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: inputText }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.url || "Erro desconhecido ao gerar QR Code");
+      }
+
+      const data = await response.json();
+      setQrCodeDataUrl(data.url);
+      toast({
+        title: "Sucesso!",
+        description: "QR Code gerado com sucesso.",
+        variant: "default",
+      });
+    } catch (error) {
+      console.log("Erro ao gerar QR Code:", error);
+      toast({
+        title: "Erro!",
+        description:
+          (error as Error).message || "Ocorreu um erro ao gerar o QR Code.",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-      // Remova esta linha com o backend
-      console.log("Conexão com o backend aqui para gerar o QR Code");
-    }, 1000);
+    }
   };
 
   const clearAll = () => {

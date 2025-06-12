@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": 1,
+  "Image": {
+    "Name": "998457202112.dkr.ecr.us-east-1.amazonaws.com/qrcode-backend:1.2.1",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 8080
+    }
+  ]
+}
