@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://qr-code-gen-lyart.vercel.app/") // Allow requests from your React app's origin
+                .allowedOrigins("https://qr-code-gen-lyart.vercel.app/", "https://qr-code-gen-gustavo-faustinos-projects.vercel.app/")// Allow requests from your React app's origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
