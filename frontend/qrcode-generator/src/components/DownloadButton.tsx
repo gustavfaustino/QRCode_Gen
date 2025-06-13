@@ -12,7 +12,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
   qrCodeDataUrl,
   disabled = false,
 }) => {
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!qrCodeDataUrl) {
       toast({
         title: "Atenção!",
