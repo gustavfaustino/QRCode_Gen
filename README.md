@@ -14,7 +14,7 @@ Este é um projeto **full-stack** desenvolvido para oferecer uma solução **int
 - 🔹 **Visualização dinâmica e em tempo real** do código gerado
 - 🔹 **Download rápido em formato PNG**
 - 🔹 **Design minimalista** com identidade visual (`charcoal` & `lavender`)
-- 🔹 **Integração com AWS S3** para persistência dos QR Codes
+- 🔹 **Integração com AWS S3** para persistência dos QR Codes, de até 30 dias.
 
 ---
 
@@ -23,11 +23,11 @@ Este é um projeto **full-stack** desenvolvido para oferecer uma solução **int
 ### 🔧 Backend – Java + Spring Boot (API RESTful)
 
 - **Java 21** com **Spring Boot 3.x**
-- **Google ZXing** para geração dos QR Codes
-- **AWS SDK S3** para upload e disponibilização pública das imagens
-- **Docker** para conteinerização e entrega contínua
-- **Maven** como gerenciador de dependências
-- **Endpoint principal**: `POST /qrcode` — recebe um texto/URL e retorna o link público da imagem
+- **Google ZXing** para gerar os QR Codes
+- **AWS SDK S3** para upload e entrega pública
+- **Docker** para containerização
+- **Elastic Beanstalk** com instância única (free tier)
+- **Amazon API Gateway** como proxy HTTPS seguro
 
 ### 🎨 Frontend – React + TypeScript
 
@@ -44,9 +44,17 @@ Este é um projeto **full-stack** desenvolvido para oferecer uma solução **int
 
 A aplicação é implantada em uma arquitetura de nuvem híbrida para otimização e escalabilidade.
 
-  * **Backend na AWS Elastic Beanstalk:** A API Spring Boot é conteinerizada com Docker e implantada no Elastic Beanstalk. Isso permite um gerenciamento simplificado de instâncias EC2, Load Balancers e Security Groups, aproveitando a Free Tier da AWS. O Amazon ECR é utilizado para armazenar a imagem Docker do backend.
-  * **Frontend no Vercel:** A interface do usuário React é implantada no Vercel, que oferece builds rápidos, deploy contínuo a partir do GitHub e hospedagem de alta performance para aplicações estáticas e Serverless Functions.
-  * **Comunicação Segura:** A comunicação entre o frontend (Vercel) e o backend (Elastic Beanstalk) é estabelecida de forma segura, com o backend configurado para lidar com requisições CORS e a transição para HTTPS em progresso para garantir a segurança do "mixed content".
+### 🔹 Backend
+- Implantado com **Elastic Beanstalk** + Docker
+- Imagem do container armazenada no **Amazon ECR**
+- Protegido por **API Gateway** (HTTP API) que fornece HTTPS
+
+### 🔹 Frontend
+- Hospedado no **Vercel**
+- Deploy contínuo via GitHub
+- Ambiente configurado com variáveis de ambiente apontando para o endpoint seguro da API
+
+
 
 ---
 
