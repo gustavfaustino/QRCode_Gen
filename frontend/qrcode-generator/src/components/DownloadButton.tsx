@@ -23,16 +23,26 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
     }
     
     try {
-      // Cria um elemento <a> temporário no DOM
+      
+      const response = await fetch(qrCodeDataUrl);
+      if (!response.ok) {
+        throw new Error("Erro ao baixar o QR Code");
+      }
+
+      const imageBlob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(imageBlob);
+
       const link = document.createElement("a");
-      link.href = qrCodeDataUrl; // Define a URL da imagem do QR Code como o href do link
-      link.download = "qrcode.png"; // Define o nome do arquivo para download
-      document.body.appendChild(link); // Adiciona o link ao corpo do documento
-      link.click(); // Simula um clique no link para iniciar o download
-      document.body.removeChild(link); // Remove o link do DOM após o download
+      link.href = blobUrl;
+      link.download = "qrcode.png";
+      document.body.appendChild(link);
+
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
 
       toast({
-        title: "Sucesso!",
+        title: "Download iniciado!",
         description: "Seu QR Code está sendo baixado.",
         variant: "default",
       })
